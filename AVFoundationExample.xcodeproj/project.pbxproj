@@ -15,6 +15,8 @@
 		A8A8749F1BB76C3500052D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A8749D1BB76C3500052D2F /* LaunchScreen.storyboard */; };
 		A8A874AA1BB76C3500052D2F /* AVFoundationExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874A91BB76C3500052D2F /* AVFoundationExampleTests.m */; };
 		A8A874B51BB76C3500052D2F /* AVFoundationExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874B41BB76C3500052D2F /* AVFoundationExampleUITests.m */; };
+		A8A874C41BB76CA500052D2F /* AFECameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874C31BB76CA500052D2F /* AFECameraView.m */; settings = {ASSET_TAGS = (); }; };
+		A8A874C61BB76CE900052D2F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A874C51BB76CE900052D2F /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		A8A874B01BB76C3500052D2F /* AVFoundationExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVFoundationExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8A874B41BB76C3500052D2F /* AVFoundationExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVFoundationExampleUITests.m; sourceTree = "<group>"; };
 		A8A874B61BB76C3500052D2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8A874C21BB76CA500052D2F /* AFECameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFECameraView.h; path = Library/AFECameraView.h; sourceTree = "<group>"; };
+		A8A874C31BB76CA500052D2F /* AFECameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFECameraView.m; path = Library/AFECameraView.m; sourceTree = "<group>"; };
+		A8A874C51BB76CE900052D2F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8A874C61BB76CE900052D2F /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +87,7 @@
 		A8A874831BB76C3500052D2F = {
 			isa = PBXGroup;
 			children = (
+				A8A874C51BB76CE900052D2F /* AVFoundation.framework */,
 				A8A8748E1BB76C3500052D2F /* AVFoundationExample */,
 				A8A874A81BB76C3500052D2F /* AVFoundationExampleTests */,
 				A8A874B31BB76C3500052D2F /* AVFoundationExampleUITests */,
@@ -101,6 +108,8 @@
 		A8A8748E1BB76C3500052D2F /* AVFoundationExample */ = {
 			isa = PBXGroup;
 			children = (
+				A8A874C21BB76CA500052D2F /* AFECameraView.h */,
+				A8A874C31BB76CA500052D2F /* AFECameraView.m */,
 				A8A874921BB76C3500052D2F /* AppDelegate.h */,
 				A8A874931BB76C3500052D2F /* AppDelegate.m */,
 				A8A874951BB76C3500052D2F /* ViewController.h */,
@@ -272,6 +281,7 @@
 			files = (
 				A8A874971BB76C3500052D2F /* ViewController.m in Sources */,
 				A8A874941BB76C3500052D2F /* AppDelegate.m in Sources */,
+				A8A874C41BB76CA500052D2F /* AFECameraView.m in Sources */,
 				A8A874911BB76C3500052D2F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
