@@ -17,6 +17,7 @@
 		A8A874B51BB76C3500052D2F /* AVFoundationExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874B41BB76C3500052D2F /* AVFoundationExampleUITests.m */; };
 		A8A874C41BB76CA500052D2F /* AFECameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874C31BB76CA500052D2F /* AFECameraView.m */; settings = {ASSET_TAGS = (); }; };
 		A8A874C61BB76CE900052D2F /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8A874C51BB76CE900052D2F /* AVFoundation.framework */; };
+		A8A874C91BB8544700052D2F /* AFECameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874C81BB8544700052D2F /* AFECameraViewController.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		A8A874C21BB76CA500052D2F /* AFECameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFECameraView.h; path = Library/AFECameraView.h; sourceTree = "<group>"; };
 		A8A874C31BB76CA500052D2F /* AFECameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFECameraView.m; path = Library/AFECameraView.m; sourceTree = "<group>"; };
 		A8A874C51BB76CE900052D2F /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		A8A874C71BB8544700052D2F /* AFECameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFECameraViewController.h; sourceTree = "<group>"; };
+		A8A874C81BB8544700052D2F /* AFECameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFECameraViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +113,8 @@
 			children = (
 				A8A874C21BB76CA500052D2F /* AFECameraView.h */,
 				A8A874C31BB76CA500052D2F /* AFECameraView.m */,
+				A8A874C71BB8544700052D2F /* AFECameraViewController.h */,
+				A8A874C81BB8544700052D2F /* AFECameraViewController.m */,
 				A8A874921BB76C3500052D2F /* AppDelegate.h */,
 				A8A874931BB76C3500052D2F /* AppDelegate.m */,
 				A8A874951BB76C3500052D2F /* ViewController.h */,
@@ -283,6 +288,7 @@
 				A8A874941BB76C3500052D2F /* AppDelegate.m in Sources */,
 				A8A874C41BB76CA500052D2F /* AFECameraView.m in Sources */,
 				A8A874911BB76C3500052D2F /* main.m in Sources */,
+				A8A874C91BB8544700052D2F /* AFECameraViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

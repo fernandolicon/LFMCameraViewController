@@ -7,21 +7,49 @@
 //
 
 #import "ViewController.h"
+#import "AFECameraView.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    IBOutlet UITapGestureRecognizer *focusGesture;
+    __weak IBOutlet AFECameraView *cameraViewStoryboard;
+    __weak IBOutlet UIImageView *pictureTaken;
+}
 
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
+    [self setCameraView:cameraViewStoryboard];
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.s
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)focusCameraView:(id)sender {
+    UIGestureRecognizer *gestureRecognizer = (UIGestureRecognizer *) sender;
+    [self focusAndExposeTap:gestureRecognizer];
+}
+
+- (IBAction)takePicture:(id)sender {
+    [self takeStillPictureWithSuccessBlock:^(UIImage *cameraImage) {
+        [pictureTaken setImage:cameraImage];
+    } forFailure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+- (IBAction)takeAndSavePicture:(id)sender {
+    [self takeStillPictureSavingInImagesWithSuccessBlock:^(UIImage *cameraImage) {
+        [pictureTaken setImage:cameraImage];
+    } forFailure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 @end

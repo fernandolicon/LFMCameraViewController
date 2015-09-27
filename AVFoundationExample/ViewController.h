@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AFECameraViewController.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : AFECameraViewController
 
 
 @end

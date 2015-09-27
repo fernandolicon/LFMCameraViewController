@@ -2,6 +2,9 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,17 +19,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lv3-Um-oaN" userLabel="Camera view" customClass="AFECameraView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lv3-Um-oaN" userLabel="Camera view" customClass="AFECameraView">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wMD-6l-gv3">
+                                        <rect key="frame" x="8" y="412" width="180" height="180"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxj-WQ-yFB">
+                                        <rect key="frame" x="237" y="46" width="126" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.46999999999999997" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Take saving image"/>
+                                        <connections>
+                                            <action selector="takeAndSavePicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L9A-aw-u8J"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WxN-te-72a">
+                                        <rect key="frame" x="258" y="8" width="85" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.47000000000000003" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Take picture">
+                                            <color key="titleColor" white="0.98664226399999999" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="takePicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iKy-XK-ZtL"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="wMD-6l-gv3" secondAttribute="bottom" constant="8" id="6J7-Yd-vhf"/>
+                                    <constraint firstItem="wMD-6l-gv3" firstAttribute="leading" secondItem="Lv3-Um-oaN" secondAttribute="leading" constant="8" id="D5E-jl-bhI"/>
+                                    <constraint firstItem="WxN-te-72a" firstAttribute="centerX" secondItem="Lv3-Um-oaN" secondAttribute="centerX" id="DFE-1N-KY7"/>
+                                    <constraint firstItem="cxj-WQ-yFB" firstAttribute="top" secondItem="WxN-te-72a" secondAttribute="bottom" constant="8" id="GR0-4Z-MYF"/>
+                                    <constraint firstItem="wMD-6l-gv3" firstAttribute="height" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="0.3" id="IEg-Zi-xAu"/>
+                                    <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="2:5" id="Rea-W5-r4U"/>
+                                    <constraint firstItem="WxN-te-72a" firstAttribute="top" secondItem="Lv3-Um-oaN" secondAttribute="top" constant="8" id="VjL-BX-6Zp"/>
+                                    <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="2:5" id="VqY-XM-VcF"/>
+                                    <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="width" multiplier="0.3" id="gUE-Vq-i2n"/>
+                                    <constraint firstItem="cxj-WQ-yFB" firstAttribute="centerX" secondItem="Lv3-Um-oaN" secondAttribute="centerX" id="kyG-Da-54c"/>
+                                    <constraint firstItem="wMD-6l-gv3" firstAttribute="height" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="0.25" id="rU2-rb-kHb"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Rea-W5-r4U"/>
+                                        <exclude reference="VqY-XM-VcF"/>
+                                        <exclude reference="rU2-rb-kHb"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lv3-Um-oaN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qds-pX-05P"/>
+                            <constraint firstItem="Lv3-Um-oaN" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="UsN-Lf-DVO"/>
+                            <constraint firstItem="Lv3-Um-oaN" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="tjg-X3-mVj"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Lv3-Um-oaN" secondAttribute="bottom" id="zAa-j2-e7A"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cameraViewStoryboard" destination="Lv3-Um-oaN" id="AB0-vZ-ngy"/>
+                        <outlet property="focusGesture" destination="5tJ-oj-XD9" id="QNi-tF-O9H"/>
+                        <outlet property="pictureTaken" destination="wMD-6l-gv3" id="yLf-kd-2cN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="5tJ-oj-XD9">
+                    <connections>
+                        <action selector="focusCameraView:" destination="BYZ-38-t0r" id="4qA-k9-muq"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="340" y="362"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="0.98664226399999999" alpha="1" colorSpace="calibratedWhite"/>
 </document>
