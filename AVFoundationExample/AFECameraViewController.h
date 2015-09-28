@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class AFECameraView;
+#import "AFECameraView.h"
 
 @interface AFECameraViewController : UIViewController
 
@@ -17,6 +17,8 @@
 - (void) takeStillPictureWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
 - (void) takeStillPictureSavingInImagesWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
 - (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer;
+- (void)changeCamera;
+- (void) setFrontCameraAsDefault;
 
 #pragma mark Save files
 - (void) saveImage: (UIImage *) image successBlock: (void (^)(void)) successBlock forFailure: (void (^)(NSError *error))failure;

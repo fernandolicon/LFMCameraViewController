@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "AFECameraView.h"
 
 @interface ViewController (){
     IBOutlet UITapGestureRecognizer *focusGesture;
@@ -24,6 +23,8 @@
     
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.s
+    
+    [self setFrontCameraAsDefault];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,6 +51,10 @@
     } forFailure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (IBAction)changeUserCamera:(id)sender {
+    [self changeCamera];
 }
 
 @end

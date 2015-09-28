@@ -17,6 +17,21 @@ UIGestureRecognizer *gestureRecognizer = (UIGestureRecognizer *) sender;
 [self focusAndExposeTap:gestureRecognizer];
 ```
 
+## Camera methods
+
+If you want to change the camera just call the **changeCamera** method.
+
+```Obj-C
+[self changeCamera];
+```
+
+By default the back camera is activated, if you want to change this just call the **setFrontCameraAsDefault** in your view did load after [super viewDidLoad]:
+
+```Obj-C
+[super viewDidLoad];
+[self setFrontCameraAsDefault];
+```
+
 ## Photo methods
 
 The photo methods let you take pictures easily and save them in the gallery if the user grants you permission.

@@ -10,7 +10,6 @@
 @import Photos;
 
 #import "AFECameraViewController.h"
-#import "AFECameraView.h"
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * SessionRunningContext = &SessionRunningContext;
@@ -481,6 +480,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     return captureDevice;
 }
 
+
 #pragma mark - Actions
 
 - (IBAction)resumeInterruptedSession:(id)sender
@@ -509,7 +509,71 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     } );
 }
 
-//Take picture
+- (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer{
+    CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[self.cameraPreview layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
+    [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
+}
+
+- (void) setFrontCameraAsDefault{
+    dispatch_async( self.sessionQueue, ^{
+        AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
+        AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionFront;
+        [self changeInputCameraForPreferredPosition:preferredPosition withCurrentDevice:currentVideoDevice];
+    });
+}
+
+- (void)changeCamera{
+    dispatch_async( self.sessionQueue, ^{
+        AVCaptureDevice *currentVideoDevice = self.videoDeviceInput.device;
+        AVCaptureDevicePosition preferredPosition = AVCaptureDevicePositionUnspecified;
+        AVCaptureDevicePosition currentPosition = currentVideoDevice.position;
+        
+        switch ( currentPosition )
+        {
+            case AVCaptureDevicePositionUnspecified:
+            case AVCaptureDevicePositionFront:
+                preferredPosition = AVCaptureDevicePositionBack;
+                break;
+            case AVCaptureDevicePositionBack:
+                preferredPosition = AVCaptureDevicePositionFront;
+                break;
+        }
+        
+        [self changeInputCameraForPreferredPosition:preferredPosition withCurrentDevice:currentVideoDevice];
+    });
+}
+
+- (void) changeInputCameraForPreferredPosition: (AVCaptureDevicePosition) preferredPosition withCurrentDevice: (AVCaptureDevice *) currentVideoDevice{
+    AVCaptureDevice *videoDevice = [AFECameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+    AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
+    
+    [self.session beginConfiguration];
+    
+    // Remove the existing device input first, since using the front and back camera simultaneously is not supported.
+    [self.session removeInput:self.videoDeviceInput];
+    
+    if ( [self.session canAddInput:videoDeviceInput] ) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
+        
+        [AFECameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
+        
+        [self.session addInput:videoDeviceInput];
+        self.videoDeviceInput = videoDeviceInput;
+    }
+    else {
+        [self.session addInput:self.videoDeviceInput];
+    }
+    
+    AVCaptureConnection *connection = [self.movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+    if ( connection.isVideoStabilizationSupported ) {
+        connection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+    }
+    
+    [self.session commitConfiguration];
+}
+
+#pragma mark Photo actions
 
 - (void) takeStillPictureSavingInImagesWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure{
     [self takeStillPictureWithSuccessBlock:^(UIImage *cameraImage) {
@@ -550,12 +614,6 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         }];
     } );
     
-}
-
-- (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer
-{
-    CGPoint devicePoint = [(AVCaptureVideoPreviewLayer *)[self.cameraPreview layer] captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:[gestureRecognizer view]]];
-    [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
 }
 
 #pragma mark -  Save files

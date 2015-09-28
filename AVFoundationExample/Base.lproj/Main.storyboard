@@ -43,10 +43,19 @@
                                             <action selector="takePicture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iKy-XK-ZtL"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fw0-0w-ecj">
+                                        <rect key="frame" x="8" y="8" width="54" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.46999999999999997" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Camera"/>
+                                        <connections>
+                                            <action selector="changeUserCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="07b-Iu-m5k"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="wMD-6l-gv3" secondAttribute="bottom" constant="8" id="6J7-Yd-vhf"/>
+                                    <constraint firstItem="fw0-0w-ecj" firstAttribute="top" secondItem="Lv3-Um-oaN" secondAttribute="top" constant="8" id="BPA-aD-jpX"/>
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="leading" secondItem="Lv3-Um-oaN" secondAttribute="leading" constant="8" id="D5E-jl-bhI"/>
                                     <constraint firstItem="WxN-te-72a" firstAttribute="centerX" secondItem="Lv3-Um-oaN" secondAttribute="centerX" id="DFE-1N-KY7"/>
                                     <constraint firstItem="cxj-WQ-yFB" firstAttribute="top" secondItem="WxN-te-72a" secondAttribute="bottom" constant="8" id="GR0-4Z-MYF"/>
@@ -54,6 +63,7 @@
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="2:5" id="Rea-W5-r4U"/>
                                     <constraint firstItem="WxN-te-72a" firstAttribute="top" secondItem="Lv3-Um-oaN" secondAttribute="top" constant="8" id="VjL-BX-6Zp"/>
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="2:5" id="VqY-XM-VcF"/>
+                                    <constraint firstItem="fw0-0w-ecj" firstAttribute="leading" secondItem="Lv3-Um-oaN" secondAttribute="leading" constant="8" id="Zir-JG-FUA"/>
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="width" multiplier="0.3" id="gUE-Vq-i2n"/>
                                     <constraint firstItem="cxj-WQ-yFB" firstAttribute="centerX" secondItem="Lv3-Um-oaN" secondAttribute="centerX" id="kyG-Da-54c"/>
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="height" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="0.25" id="rU2-rb-kHb"/>
