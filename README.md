@@ -2,6 +2,20 @@
 This is a view controller class with different methods for an easy implementation of AVFoundation.
 
 In order to use it you just need to inherit this class from your view controller and add an UIView that uses the included CameraView.
+## Setting the class
+
+To start using the class you need to set your view as a Camera view with the **setCameraView:** method:
+
+```Obj-C
+[self setCameraView:yourView];
+```
+
+If you want to implement a focus tap gesture just call the method **focusAndExposeTap** like this:
+
+```Obj-C
+UIGestureRecognizer *gestureRecognizer = (UIGestureRecognizer *) sender;
+[self focusAndExposeTap:gestureRecognizer];
+```
 
 ## Photo methods
 
