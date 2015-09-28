@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AFECameraView.h"
+#import "LFMCameraView.h"
 
-@interface AFECameraViewController : UIViewController
+@interface LFMCameraViewController : UIViewController
 
-- (void)setCameraView: (AFECameraView *) cameraView;
+- (void)setCameraView: (LFMCameraView *) cameraView;
 
 #pragma mark Camera actions
 - (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer;

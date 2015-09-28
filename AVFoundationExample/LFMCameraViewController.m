@@ -9,7 +9,7 @@
 @import AVFoundation;
 @import Photos;
 
-#import "AFECameraViewController.h"
+#import "LFMCameraViewController.h"
 
 static void * CapturingStillImageContext = &CapturingStillImageContext;
 static void * SessionRunningContext = &SessionRunningContext;
@@ -20,7 +20,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSessionConfigurationFailed
 };
 
-@interface AFECameraViewController () <AVCaptureFileOutputRecordingDelegate>
+@interface LFMCameraViewController () <AVCaptureFileOutputRecordingDelegate>
 
 // Session management.
 @property (nonatomic) dispatch_queue_t sessionQueue; // Communicate with the session and other session objects on this queue.
@@ -35,11 +35,11 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
 
 
-@property (nonatomic, weak) IBOutlet AFECameraView *cameraPreview;
+@property (nonatomic, weak) IBOutlet LFMCameraView *cameraPreview;
 
 @end
 
-@implementation AFECameraViewController
+@implementation LFMCameraViewController
 
 #pragma mark - View controller methods
 
@@ -102,7 +102,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         self.backgroundRecordingID = UIBackgroundTaskInvalid;
         NSError *error = nil;
         
-        AVCaptureDevice *videoDevice = [AFECameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
+        AVCaptureDevice *videoDevice = [LFMCameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionBack];
         AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
         
         if ( ! videoDeviceInput ) {
@@ -544,7 +544,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 }
 
 - (void) changeInputCameraForPreferredPosition: (AVCaptureDevicePosition) preferredPosition withCurrentDevice: (AVCaptureDevice *) currentVideoDevice{
-    AVCaptureDevice *videoDevice = [AFECameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+    AVCaptureDevice *videoDevice = [LFMCameraViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
     AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
     
     [self.session beginConfiguration];
@@ -555,7 +555,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     if ( [self.session canAddInput:videoDeviceInput] ) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
         
-        [AFECameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
+        [LFMCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
         
         [self.session addInput:videoDeviceInput];
@@ -596,7 +596,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         connection.videoOrientation = previewLayer.connection.videoOrientation;
         
         // Flash set to Auto for Still Capture.
-        [AFECameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:self.videoDeviceInput.device];
+        [LFMCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:self.videoDeviceInput.device];
         
         // Capture a still image.
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:connection completionHandler:^( CMSampleBufferRef imageDataSampleBuffer, NSError *error ) {
@@ -643,7 +643,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
             connection.videoOrientation = previewLayer.connection.videoOrientation;
             
             // Turn OFF flash for video recording.
-            [AFECameraViewController setFlashMode:AVCaptureFlashModeOff forDevice:self.videoDeviceInput.device];
+            [LFMCameraViewController setFlashMode:AVCaptureFlashModeOff forDevice:self.videoDeviceInput.device];
             
             // Start recording to a temporary file.
             NSString *outputFileName = [NSProcessInfo processInfo].globallyUniqueString;
@@ -774,7 +774,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     });
 }
 
-- (void)setCameraView: (AFECameraView *) cameraView{
+- (void)setCameraView: (LFMCameraView *) cameraView{
     self.cameraPreview = cameraView;
 }
 

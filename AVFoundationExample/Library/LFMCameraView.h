@@ -10,7 +10,7 @@
 
 @class AVCaptureSession;
 
-@interface AFECameraView : UIView
+@interface LFMCameraView : UIView
 
 @property (nonatomic) AVCaptureSession *session;
 

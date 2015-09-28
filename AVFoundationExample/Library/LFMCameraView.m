@@ -6,10 +6,10 @@
 //  Copyright © 2015 Luis Fernando Mata. All rights reserved.
 //
 
-#import "AFECameraView.h"
+#import "LFMCameraView.h"
 #import <AVFoundation/AVFoundation.h>
 
-@implementation AFECameraView
+@implementation LFMCameraView
 
 + (Class)layerClass
 {

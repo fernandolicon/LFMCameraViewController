@@ -10,7 +10,7 @@
 
 @interface ViewController (){
     IBOutlet UITapGestureRecognizer *focusGesture;
-    __weak IBOutlet AFECameraView *cameraViewStoryboard;
+    __weak IBOutlet LFMCameraView *cameraViewStoryboard;
     __weak IBOutlet UIImageView *pictureTaken;
     __weak IBOutlet UIButton *pictureButton;
     __weak IBOutlet UIButton *savePictureButton;
