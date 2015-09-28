@@ -68,4 +68,18 @@ Or you can call **takeStillPictureWithSuccessBlock:forFailure:** and save the im
 
 ## Video methods
 
-Coming soon.
+Video is a little different from picture. When you start recording video it's recomended to hide all the other buttons to take pictures or change camera, for this you can use the method **isCameraRecording**, it returns a boolean value.
+
+```Obj-C
+[self isCameraRecording];
+```
+
+If you want to start or stop a recording session you can call the **toggleMovieRecording**, this method will start or end (depending on the status of recording) a video recording. When the recording is stopped the file is saved in the user phone.
+
+```Obj-C
+[self toggleMovieRecording];
+```
+
+## What's missing?
+
+The idea is to implement a way to record a video without saving it into the user phone (just like the picture works). Also all the session methods are not implemented.

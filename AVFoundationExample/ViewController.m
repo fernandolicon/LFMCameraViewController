@@ -12,6 +12,10 @@
     IBOutlet UITapGestureRecognizer *focusGesture;
     __weak IBOutlet AFECameraView *cameraViewStoryboard;
     __weak IBOutlet UIImageView *pictureTaken;
+    __weak IBOutlet UIButton *pictureButton;
+    __weak IBOutlet UIButton *savePictureButton;
+    __weak IBOutlet UIButton *changeCameraButton;
+    __weak IBOutlet UIButton *recordButton;
 }
 
 @end
@@ -57,4 +61,21 @@
     [self changeCamera];
 }
 
+- (IBAction)record:(id)sender {
+    if ([self isCameraRecording]) {
+        [savePictureButton setHidden:NO];
+        [pictureButton setHidden:NO];
+        [changeCameraButton setHidden:NO];
+        [pictureTaken setHidden:NO];
+        [recordButton setTitle:@"Record" forState:UIControlStateNormal];
+        [self toggleMovieRecording];
+    }else{
+        [savePictureButton setHidden:YES];
+        [pictureButton setHidden:YES];
+        [changeCameraButton setHidden:YES];
+        [pictureTaken setHidden:YES];
+        [recordButton setTitle:@"Stop recording" forState:UIControlStateNormal];
+        [self toggleMovieRecording];
+    }
+}
 @end

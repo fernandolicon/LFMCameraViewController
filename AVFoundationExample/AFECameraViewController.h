@@ -14,11 +14,17 @@
 - (void)setCameraView: (AFECameraView *) cameraView;
 
 #pragma mark Camera actions
-- (void) takeStillPictureWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
-- (void) takeStillPictureSavingInImagesWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
 - (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer;
 - (void)changeCamera;
 - (void) setFrontCameraAsDefault;
+
+#pragma Photo actions
+- (void) takeStillPictureWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
+- (void) takeStillPictureSavingInImagesWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
+
+#pragma Video actions
+- (BOOL) isCameraRecording;
+- (void)toggleMovieRecording;
 
 #pragma mark Save files
 - (void) saveImage: (UIImage *) image successBlock: (void (^)(void)) successBlock forFailure: (void (^)(NSError *error))failure;
