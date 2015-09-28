@@ -20,7 +20,9 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     AVCamSetupResultSessionConfigurationFailed
 };
 
-@interface LFMCameraViewController () <AVCaptureFileOutputRecordingDelegate>
+@interface LFMCameraViewController () <AVCaptureFileOutputRecordingDelegate>{
+    enum FlashConfiguration flashConfiguration;
+}
 
 // Session management.
 @property (nonatomic) dispatch_queue_t sessionQueue; // Communicate with the session and other session objects on this queue.
@@ -52,6 +54,9 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     
     // Setup the preview view
     [self.cameraPreview setSession:self.session];
+    
+    //Set flash enum
+    flashConfiguration = LFMFlashConfigurationAutomatic;
     
     //Communicate with the session and other object on the queue
     self.sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
@@ -480,6 +485,14 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     return captureDevice;
 }
 
+- (FlashConfiguration) cameraFlashConfiguration{
+    return flashConfiguration;
+}
+
+- (void) setFlashConfiguration: (FlashConfiguration) newConfiguration{
+    flashConfiguration = newConfiguration;
+}
+
 
 #pragma mark - Actions
 
@@ -595,8 +608,24 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         // Update the orientation on the still image output video connection before capturing.
         connection.videoOrientation = previewLayer.connection.videoOrientation;
         
-        // Flash set to Auto for Still Capture.
-        [LFMCameraViewController setFlashMode:AVCaptureFlashModeAuto forDevice:self.videoDeviceInput.device];
+        // Flash set by default it would be Auto, but you can change this
+        AVCaptureFlashMode flashMode;
+        switch (flashConfiguration) {
+            case LFMFlashConfigurationAutomatic:
+                flashMode = AVCaptureFlashModeAuto;
+                break;
+            case LFMFlashConfigurationAlways:
+                flashMode = AVCaptureFlashModeOn;
+                break;
+            case LFMFlashConfigurationDeactivated:
+                flashMode = AVCaptureFlashModeOff;
+                break;
+            default:
+                break;
+        }
+        
+        
+        [LFMCameraViewController setFlashMode:flashMode forDevice:self.videoDeviceInput.device];
         
         // Capture a still image.
         [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:connection completionHandler:^( CMSampleBufferRef imageDataSampleBuffer, NSError *error ) {
@@ -605,8 +634,6 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
                 NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
                 UIImage *imageTaken = [UIImage imageWithData:imageData];
                 success(imageTaken);
-                /*
-                 */
             }
             else {
                 failure(error);

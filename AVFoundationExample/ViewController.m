@@ -16,6 +16,7 @@
     __weak IBOutlet UIButton *savePictureButton;
     __weak IBOutlet UIButton *changeCameraButton;
     __weak IBOutlet UIButton *recordButton;
+    __weak IBOutlet UIButton *flashButton;
 }
 
 @end
@@ -59,6 +60,27 @@
 
 - (IBAction)changeUserCamera:(id)sender {
     [self changeCamera];
+}
+
+- (IBAction)changeFlash:(id)sender {
+    FlashConfiguration currentFlashConfiguration = [self cameraFlashConfiguration];
+    
+    switch (currentFlashConfiguration) {
+        case LFMFlashConfigurationAutomatic:
+            [self setFlashConfiguration:LFMFlashConfigurationAlways];
+            [flashButton setTitle:@"Flash On" forState:UIControlStateNormal];
+            break;
+        case LFMFlashConfigurationAlways:
+            [self setFlashConfiguration:LFMFlashConfigurationDeactivated];
+            [flashButton setTitle:@"Flash Off" forState:UIControlStateNormal];
+            break;
+        case LFMFlashConfigurationDeactivated:
+            [self setFlashConfiguration:LFMFlashConfigurationAutomatic];
+            [flashButton setTitle:@"Flash Auto" forState:UIControlStateNormal];
+            break;
+        default:
+            break;
+    }
 }
 
 - (IBAction)record:(id)sender {

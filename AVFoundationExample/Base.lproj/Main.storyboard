@@ -59,6 +59,13 @@
                                             <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mwI-YC-rri"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7s-Fq-fw9">
+                                        <rect key="frame" x="8" y="46" width="72" height="30"/>
+                                        <state key="normal" title="Flash Auto"/>
+                                        <connections>
+                                            <action selector="changeFlash:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uCz-0d-Gz2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -72,6 +79,8 @@
                                     <constraint firstItem="WxN-te-72a" firstAttribute="top" secondItem="Lv3-Um-oaN" secondAttribute="top" constant="8" id="VjL-BX-6Zp"/>
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="height" multiplier="2:5" id="VqY-XM-VcF"/>
                                     <constraint firstItem="fw0-0w-ecj" firstAttribute="leading" secondItem="Lv3-Um-oaN" secondAttribute="leading" constant="8" id="Zir-JG-FUA"/>
+                                    <constraint firstItem="B7s-Fq-fw9" firstAttribute="leading" secondItem="Lv3-Um-oaN" secondAttribute="leading" constant="8" id="bcR-gh-Bxt"/>
+                                    <constraint firstItem="B7s-Fq-fw9" firstAttribute="top" secondItem="fw0-0w-ecj" secondAttribute="bottom" constant="8" id="cUh-lI-zcz"/>
                                     <constraint firstItem="McW-qg-E2r" firstAttribute="top" secondItem="Lv3-Um-oaN" secondAttribute="top" constant="8" id="cp8-5H-AKN"/>
                                     <constraint firstAttribute="trailing" secondItem="McW-qg-E2r" secondAttribute="trailing" constant="8" id="fTd-R1-l8N"/>
                                     <constraint firstItem="wMD-6l-gv3" firstAttribute="width" secondItem="Lv3-Um-oaN" secondAttribute="width" multiplier="0.3" id="gUE-Vq-i2n"/>
@@ -98,6 +107,7 @@
                     <connections>
                         <outlet property="cameraViewStoryboard" destination="Lv3-Um-oaN" id="AB0-vZ-ngy"/>
                         <outlet property="changeCameraButton" destination="fw0-0w-ecj" id="Suk-BM-ZDC"/>
+                        <outlet property="flashButton" destination="B7s-Fq-fw9" id="5zL-Ax-7Gm"/>
                         <outlet property="focusGesture" destination="5tJ-oj-XD9" id="QNi-tF-O9H"/>
                         <outlet property="pictureButton" destination="WxN-te-72a" id="RMg-sE-6Nt"/>
                         <outlet property="pictureTaken" destination="wMD-6l-gv3" id="yLf-kd-2cN"/>

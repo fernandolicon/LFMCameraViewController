@@ -11,12 +11,21 @@
 
 @interface LFMCameraViewController : UIViewController
 
+typedef enum FlashConfiguration
+{
+    LFMFlashConfigurationAlways,
+    LFMFlashConfigurationAutomatic,
+    LFMFlashConfigurationDeactivated
+} FlashConfiguration;
+
 - (void)setCameraView: (LFMCameraView *) cameraView;
 
 #pragma mark Camera actions
 - (void)focusAndExposeTap:(UIGestureRecognizer *)gestureRecognizer;
 - (void)changeCamera;
 - (void) setFrontCameraAsDefault;
+- (FlashConfiguration) cameraFlashConfiguration;
+- (void) setFlashConfiguration: (FlashConfiguration) newConfiguration;
 
 #pragma Photo actions
 - (void) takeStillPictureWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;

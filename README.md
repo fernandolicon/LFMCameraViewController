@@ -32,6 +32,21 @@ By default the back camera is activated, if you want to change this just call th
 [self setFrontCameraAsDefault];
 ```
 
+The flash is in automatic mode by default, you can change this by calling the method **setFlashConfiguration:**, it would take a FlashConfiguration enum value that has three options:
+* **LFMFlashConfigurationAutomatic** - Uses the flash if needed
+* **LFMFlashConfigurationAlways** - Uses the flash for every photo taken
+* **LFMFlashConfigurationDeactivated** -The flash would never be activated
+
+```Obj-C
+[self setFlashConfiguration:LFMFlashConfigurationAlways];
+```
+
+Also, if you want to know what configuration you've activated you just need to call the **cameraFlashConfiguration** method, that will return the activated enum value.
+
+```Obj-C
+FlashConfiguration currentFlashConfiguration = [self cameraFlashConfiguration];
+```
+
 ## Photo methods
 
 The photo methods let you take pictures easily and save them in the gallery if the user grants you permission.
