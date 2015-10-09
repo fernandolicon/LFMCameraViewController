@@ -47,6 +47,12 @@ Also, if you want to know what configuration you've activated you just need to c
 FlashConfiguration currentFlashConfiguration = [self cameraFlashConfiguration];
 ```
 
+It's important to know if user has granted you permission or if camera is available at all (maybe the device doesn't have a camera). To do this you can call the **isCameraAvailable** that will return a BOOL value.
+
+```Obj-C
+[self isCameraAvailable];
+```
+
 ## Photo methods
 
 The photo methods let you take pictures easily and save them in the gallery if the user grants you permission.
