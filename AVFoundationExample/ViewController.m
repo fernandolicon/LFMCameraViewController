@@ -24,12 +24,12 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
-    [self setCameraView:cameraViewStoryboard];
-    
     [super viewDidLoad];
+    
+    [self setCameraView:cameraViewStoryboard];
     // Do any additional setup after loading the view, typically from a nib.s
     
-    [self setFrontCameraAsDefault];
+    //[self setFrontCameraAsDefault];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,20 +84,22 @@
 }
 
 - (IBAction)record:(id)sender {
-    if ([self isCameraRecording]) {
-        [savePictureButton setHidden:NO];
-        [pictureButton setHidden:NO];
-        [changeCameraButton setHidden:NO];
-        [pictureTaken setHidden:NO];
-        [recordButton setTitle:@"Record" forState:UIControlStateNormal];
-        [self toggleMovieRecording];
-    }else{
-        [savePictureButton setHidden:YES];
-        [pictureButton setHidden:YES];
-        [changeCameraButton setHidden:YES];
-        [pictureTaken setHidden:YES];
-        [recordButton setTitle:@"Stop recording" forState:UIControlStateNormal];
-        [self toggleMovieRecording];
+    if ([self isCameraAvailable]) {
+        if ([self isCameraRecording]) {
+            [savePictureButton setHidden:NO];
+            [pictureButton setHidden:NO];
+            [changeCameraButton setHidden:NO];
+            [pictureTaken setHidden:NO];
+            [recordButton setTitle:@"Record" forState:UIControlStateNormal];
+            [self toggleMovieRecording];
+        }else{
+            [savePictureButton setHidden:YES];
+            [pictureButton setHidden:YES];
+            [changeCameraButton setHidden:YES];
+            [pictureTaken setHidden:YES];
+            [recordButton setTitle:@"Stop recording" forState:UIControlStateNormal];
+            [self toggleMovieRecording];
+        }
     }
 }
 @end

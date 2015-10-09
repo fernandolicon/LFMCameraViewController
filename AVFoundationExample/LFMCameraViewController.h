@@ -26,6 +26,7 @@ typedef enum FlashConfiguration
 - (void) setFrontCameraAsDefault;
 - (FlashConfiguration) cameraFlashConfiguration;
 - (void) setFlashConfiguration: (FlashConfiguration) newConfiguration;
+- (BOOL) isCameraAvailable;
 
 #pragma Photo actions
 - (void) takeStillPictureWithSuccessBlock: (void (^)(UIImage *cameraImage))success forFailure: (void (^)(NSError *error))failure;
