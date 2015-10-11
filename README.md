@@ -1,7 +1,8 @@
 # Camera View Controller
 This is a view controller class with different methods for an easy implementation of AVFoundation.
 
-In order to use it you just need to **inherit this class from your view controller** and add an UIView that uses the included CameraView.
+In order to use it you just need to **inherit this class from your view controller**, include the **AVFoundation framework** and add an UIView that uses the included **LFMCameraView**.
+
 ## Setting the class
 
 To start using the class you need to set your view as a Camera view with the **setCameraView:** method:
