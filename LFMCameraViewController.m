@@ -738,16 +738,19 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 }
 
 - (void)setCameraView: (LFMCameraView *) cameraView{
-    self.cameraPreview = cameraView;
-    [self.cameraPreview setSession:self.session];
-    UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
-    AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
-    if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
-        initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
-    }
-    
-    AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.cameraPreview.layer;
-    previewLayer.connection.videoOrientation = initialVideoOrientation;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.cameraPreview = cameraView;
+        [cameraView setSession:self.session];
+        [self.cameraPreview setSession:self.session];
+        UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
+        AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
+        if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
+            initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
+        }
+        
+        AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.cameraPreview.layer;
+        previewLayer.connection.videoOrientation = initialVideoOrientation;
+    });
 }
 
 
