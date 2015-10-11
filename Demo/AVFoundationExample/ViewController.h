@@ -6,7 +6,6 @@
 //  Copyright © 2015 Luis Fernando Mata. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "LFMCameraViewController.h"
 
 @interface ViewController : LFMCameraViewController

@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A86A34B91BC9ACD200F0820E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A86A34B81BC9ACD200F0820E /* ViewController.m */; settings = {ASSET_TAGS = (); }; };
 		A8A874911BB76C3500052D2F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874901BB76C3500052D2F /* main.m */; };
 		A8A874941BB76C3500052D2F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874931BB76C3500052D2F /* AppDelegate.m */; };
-		A8A874971BB76C3500052D2F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8A874961BB76C3500052D2F /* ViewController.m */; };
 		A8A8749A1BB76C3500052D2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A874981BB76C3500052D2F /* Main.storyboard */; };
 		A8A8749C1BB76C3500052D2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8A8749B1BB76C3500052D2F /* Assets.xcassets */; };
 		A8A8749F1BB76C3500052D2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8A8749D1BB76C3500052D2F /* LaunchScreen.storyboard */; };
@@ -38,12 +38,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A86A34B71BC9ACD200F0820E /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A86A34B81BC9ACD200F0820E /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A8A8748C1BB76C3500052D2F /* AVFoundationExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVFoundationExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8A874901BB76C3500052D2F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A8A874921BB76C3500052D2F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A8A874931BB76C3500052D2F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A8A874951BB76C3500052D2F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A8A874961BB76C3500052D2F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		A8A874991BB76C3500052D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A8A8749B1BB76C3500052D2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8A8749E1BB76C3500052D2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 				A8A874C81BB8544700052D2F /* LFMCameraViewController.m */,
 				A8A874921BB76C3500052D2F /* AppDelegate.h */,
 				A8A874931BB76C3500052D2F /* AppDelegate.m */,
-				A8A874951BB76C3500052D2F /* ViewController.h */,
-				A8A874961BB76C3500052D2F /* ViewController.m */,
+				A86A34B71BC9ACD200F0820E /* ViewController.h */,
+				A86A34B81BC9ACD200F0820E /* ViewController.m */,
 				A8A874981BB76C3500052D2F /* Main.storyboard */,
 				A8A8749B1BB76C3500052D2F /* Assets.xcassets */,
 				A8A8749D1BB76C3500052D2F /* LaunchScreen.storyboard */,
@@ -284,7 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A8A874971BB76C3500052D2F /* ViewController.m in Sources */,
+				A86A34B91BC9ACD200F0820E /* ViewController.m in Sources */,
 				A8A874941BB76C3500052D2F /* AppDelegate.m in Sources */,
 				A8A874C41BB76CA500052D2F /* LFMCameraView.m in Sources */,
 				A8A874911BB76C3500052D2F /* main.m in Sources */,

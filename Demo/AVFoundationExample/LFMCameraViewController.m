@@ -37,7 +37,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
 
 
-@property (nonatomic, weak) IBOutlet LFMCameraView *cameraPreview;
+@property (nonatomic, strong) LFMCameraView *cameraPreview;
 
 @end
 
@@ -90,6 +90,10 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
             break;
         }
     }
+    
+    dispatch_async( self.sessionQueue, ^{
+        [self setUpCaptureSession];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -220,7 +224,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         }
     }
     else if ( context == SessionRunningContext ) {
-        BOOL isSessionRunning = [change[NSKeyValueChangeNewKey] boolValue];
+        //BOOL isSessionRunning = [change[NSKeyValueChangeNewKey] boolValue];
         
         dispatch_async( dispatch_get_main_queue(), ^{
             // Only enable the ability to change camera if the device has more than one camera.
@@ -272,69 +276,17 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
     // then the user can let AVCam resume the session running, which will stop music playback.
     // Note that stopping music playback in control center will not automatically resume the session running.
     // Also note that it is not always possible to resume, see -[resumeInterruptedSession:].
-    BOOL showResumeButton = NO;
-    
-    // In iOS 9 and later, the userInfo dictionary contains information on why the session was interrupted.
-    if ( &AVCaptureSessionInterruptionReasonKey ) {
-        AVCaptureSessionInterruptionReason reason = [notification.userInfo[AVCaptureSessionInterruptionReasonKey] integerValue];
-        NSLog( @"Capture session was interrupted with reason %ld", (long)reason );
-        
-        if ( reason == AVCaptureSessionInterruptionReasonAudioDeviceInUseByAnotherClient ||
-            reason == AVCaptureSessionInterruptionReasonVideoDeviceInUseByAnotherClient ) {
-            showResumeButton = YES;
-        }
-        else if ( reason == AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableWithMultipleForegroundApps ) {
-            // Simply fade-in a label to inform the user that the camera is unavailable.
-            /*self.cameraUnavailableLabel.hidden = NO;
-             self.cameraUnavailableLabel.alpha = 0.0;*/
-            [UIView animateWithDuration:0.25 animations:^{
-                //self.cameraUnavailableLabel.alpha = 1.0;
-            }];
-        }
-    }
-    else {
-        NSLog( @"Capture session was interrupted" );
-        showResumeButton = ( [UIApplication sharedApplication].applicationState == UIApplicationStateInactive );
-    }
-    
-    if ( showResumeButton ) {
-        // Simply fade-in a button to enable the user to try to resume the session running.
-        /*self.resumeButton.hidden = NO;
-         self.resumeButton.alpha = 0.0;*/
-        [UIView animateWithDuration:0.25 animations:^{
-            //self.resumeButton.alpha = 1.0;
-        }];
-    }
 }
 
 - (void)sessionInterruptionEnded:(NSNotification *)notification
 {
     NSLog( @"Capture session interruption ended" );
-    /*
-     if ( ! self.resumeButton.hidden ) {
-     [UIView animateWithDuration:0.25 animations:^{
-     self.resumeButton.alpha = 0.0;
-     } completion:^( BOOL finished ) {
-     self.resumeButton.hidden = YES;
-     }];
-     }
-     if ( ! self.cameraUnavailableLabel.hidden ) {
-     [UIView animateWithDuration:0.25 animations:^{
-     self.cameraUnavailableLabel.alpha = 0.0;
-     } completion:^( BOOL finished ) {
-     self.cameraUnavailableLabel.hidden = YES;
-     }];
-     }*/
 }
 
 #pragma mark Device Configuration
 
 - (void) setUpCaptureSession{
-    dispatch_async( self.sessionQueue, ^{
-        if ( self.setupResult != AVCamSetupResultSuccess ) {
-            return;
-        }
-        
+    if ( self.setupResult == AVCamSetupResultSuccess ) {
         self.backgroundRecordingID = UIBackgroundTaskInvalid;
         NSError *error = nil;
         
@@ -350,25 +302,6 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         if ( [self.session canAddInput:videoDeviceInput] ) {
             [self.session addInput:videoDeviceInput];
             self.videoDeviceInput = videoDeviceInput;
-            
-            dispatch_async( dispatch_get_main_queue(), ^{
-                // Why are we dispatching this to the main queue?
-                // Because AVCaptureVideoPreviewLayer is the backing layer for AAPLPreviewView and UIView
-                // can only be manipulated on the main thread.
-                // Note: As an exception to the above rule, it is not necessary to serialize video orientation changes
-                // on the AVCaptureVideoPreviewLayer’s connection with other session manipulation.
-                
-                // Use the status bar orientation as the initial video orientation. Subsequent orientation changes are handled by
-                // -[viewWillTransitionToSize:withTransitionCoordinator:].
-                UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
-                AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
-                if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
-                    initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
-                }
-                
-                AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.cameraPreview.layer;
-                previewLayer.connection.videoOrientation = initialVideoOrientation;
-            } );
         }
         else {
             NSLog( @"Could not add video device input to the session" );
@@ -415,7 +348,7 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
         }
         
         [self.session commitConfiguration];
-    } );
+    }
 }
 
 - (void)focusWithMode:(AVCaptureFocusMode)focusMode exposeWithMode:(AVCaptureExposureMode)exposureMode atDevicePoint:(CGPoint)point monitorSubjectAreaChange:(BOOL)monitorSubjectAreaChange
@@ -805,9 +738,19 @@ typedef NS_ENUM( NSInteger, AVCamSetupResult ) {
 }
 
 - (void)setCameraView: (LFMCameraView *) cameraView{
-    self.cameraPreview = cameraView;
-    [self.cameraPreview setSession:self.session];
-    [self setUpCaptureSession];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.cameraPreview = cameraView;
+        [cameraView setSession:self.session];
+        [self.cameraPreview setSession:self.session];
+        UIInterfaceOrientation statusBarOrientation = [UIApplication sharedApplication].statusBarOrientation;
+        AVCaptureVideoOrientation initialVideoOrientation = AVCaptureVideoOrientationPortrait;
+        if ( statusBarOrientation != UIInterfaceOrientationUnknown ) {
+            initialVideoOrientation = (AVCaptureVideoOrientation)statusBarOrientation;
+        }
+        
+        AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer *)self.cameraPreview.layer;
+        previewLayer.connection.videoOrientation = initialVideoOrientation;
+    });
 }
 
 

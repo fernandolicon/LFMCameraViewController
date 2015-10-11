@@ -25,11 +25,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self setCameraView:cameraViewStoryboard];
     // Do any additional setup after loading the view, typically from a nib.s
     
-    //[self setFrontCameraAsDefault];
+    [self setFrontCameraAsDefault];
 }
 
 - (void)didReceiveMemoryWarning {
