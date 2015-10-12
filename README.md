@@ -3,6 +3,8 @@ This is a view controller class with different methods for an easy implementatio
 
 In order to use it you just need to **inherit this class from your view controller**, include the **AVFoundation framework** and add an UIView that uses the included **LFMCameraView**.
 
+I'm working on a Swift version of this class, it is availbale [here](https://github.com/fernandolicon/LFMCameraViewController-Swift) but I'm just starting with it.
+
 ## Setting the class
 
 To start using the class you need to set your view as a Camera view with the **setCameraView:** method:
